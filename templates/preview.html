@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffcc33, #ff6699);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 20px;
+            animation: slideInUp 1s ease-out;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            animation: fadeInDown 1s ease-out;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: zoomIn 1s ease-out;
+        }
+        form {
+            margin-top: 20px;
+            animation: zoomIn 1s ease-out;
+        }
+        select, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button {
+            background-color: #ff6699;
+            color: white;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+        }
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Video Preview</h1>
+        <div class="video-info">
+            <h2><i>{{ video_info.title }}</i></h2>
+            <img src="{{ video_info.thumbnail_url }}" alt="Video Thumbnail">
+        </div>
+        <form action="{{ url_for('download') }}" method="post">
+            <input type="hidden" name="url" value="{{ video_info.url }}">
+            <label for="resolution">Select Resolution:</label>
+            <select name="resolution" id="resolution">
+                
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="360p">360p</option>
+            </select>
+            <br>
+            <label for="download_type">Download type:</label>
+            <select name="download_type" id="download_type">
+                <option value="both">Both (Video & Audio)</option>
+                <option value="video">Video Only</option>
+                <option value="audio">Audio Only</option>
+            </select>
+            <br>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+    
+</body>
+</html>
+           
+   
+</body>
+</html>

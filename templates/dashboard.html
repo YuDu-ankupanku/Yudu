@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffcc33, #ff6699);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            animation: fadeInDown 1s ease-out;
+        }
+        form {
+            margin-top: 20px;
+            animation: zoomIn 1s ease-out;
+        }
+        input, select, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="text"] {
+            width: 300px;
+        }
+        select {
+            max-width: 100%;
+        }
+        button {
+            background-color: #ff6699;
+            color: white;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+        }
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Downloader</h1>
+    <form action="/preview" method="POST">
+        <input type="text" name="url" placeholder="Enter YouTube URL" required>
+        <br>
+        <button type="submit">Preview Video</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YuDu Login Form</title>
+    
+    <style>
+        /* Additional styles specific to this HTML can go here if needed */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('signup.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+            z-index: 1;
+        }
+        .container {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 2; /* Ensure this is above the overlay */
+            position: relative; /* Create stacking context */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container.dark-mode {
+            background-color: #333;
+            color: #ffffff;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 50px; /* Adjust the width as needed */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .login-form h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .login-form p {
+            margin: 10px 0;
+        }
+        .login-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-form label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .login-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .login-form input.dark-mode {
+            background-color: #555;
+            border-color: #777;
+            color: #ffffff;
+        }
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        .login-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%; /* Make the button full width */
+        }
+        .login-form button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .login-form a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-form a:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .dark-mode-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+        }
+        .dark-mode-label {
+            margin-left: 10px;
+            color: #fff;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #007bff;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="login-form">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="YuDu Logo" class="logo">
+            <h1>Welcome Back to YuDu</h1>
+            
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                </div>
+            
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+                </div>
+
+                <button type="submit" class="btn btn-dark">Log In</button>
+
+                <p>Log in to your account or <a href="/register">Register</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" id="toggle-dark-mode">
+            <span class="slider round"></span>
+        </label>
+        <span class="dark-mode-label">Dark Mode</span>
+    </div>
+    
+    <script>
+        function togglePassword() {
+    var passwordField = document.getElementById("password");
+    var toggleText = document.querySelector(".toggle-password");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleText.textContent = "Hide";
+    } else {
+        passwordField.type = "password";
+        toggleText.textContent = "Show";
+    }
+}
+
+document.getElementById("toggle-dark-mode").addEventListener("change", function() {
+    document.body.classList.toggle("dark-mode");
+    document.querySelector(".container").classList.toggle("dark-mode");
+    var inputs = document.querySelectorAll("input");
+    inputs.forEach(function(input) {
+        input.classList.toggle("dark-mode");
+    });
+});
+
+    </script>
+    
+    
+</body>
+</html>
